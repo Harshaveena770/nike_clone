@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nike Clone</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0;
+        padding: 0; 
+        box-sizing: border-box; 
+    }
+    .product-card img { 
+        height: 250px; 
+        object-fit: cover; 
+    }
+    .promo-banner { 
+        background: black; 
+        color: white; 
+        padding: 40px; 
+        text-align: center; 
+    }
+    footer { 
+        background: #111; 
+        color: white; 
+        padding: 40px 0; }
+    footer a { 
+        color: #bbb; 
+        text-decoration: none; 
+    }
+    footer a:hover { 
+        color: white; 
+    }
+    .hero {
+      background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25)), url('https://images.unsplash.com/photo-1519741499849-2c3c39f3c9fb?auto=format&fit=crop&w=1600&q=60') center/cover no-repeat;
+      color: white;
+      min-height: 62vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 1rem;
+    }
+
+    .hero .badge {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.95);
+      border-radius: 999px;
+      padding: 0.35rem 0.8rem;
+      font-weight:600;
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: .9rem;
+    }
+
+    .hero h1{
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      font-weight:800;
+      margin-bottom: .75rem;
+      line-height:1.02;
+    }
+
+    .hero p.lead{
+      color: rgba(255,255,255,0.9);
+      max-width: 60ch;
+      margin-bottom: 1.25rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid" style="background-color: rgba(147, 140, 140, 0.126);">
+    <img src="data:image/png;base64,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" alt="nikye logo" style="width: 50px; height: 50px;"/>
+    <a class="navbar-brand" href="https://www.nike.com/in"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Men</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Women</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Kids</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            SNKRS
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Feed</a></li>
+            <li><a class="dropdown-item" href="#">InStock</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Upcoming</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Sale</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart m-2" viewBox="0 0 16 16">
+  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag-check-fill m-2" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0m-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+</svg>
+        
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO CAROUSEL -->
+<section class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <span class="badge">LIMITED</span>
+          <h1>Air Runner — Lightweight performance sneakers</h1>
+          <p class="lead">Engineered with responsive cushioning and a breathable knit upper. Built for everyday runs and street style.</p>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-lg btn-light fw-bold">Shop Men</a>
+            <a href="#" class="btn btn-outline-light btn-lg">Shop Women</a>
+          </div>
+        </div>
+        <div class="col-lg-5 d-none d-lg-block">
+          <div class="card bg-transparent border-0">
+            <div class="product-img">
+              <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=60" alt="sneaker" class="img-fluid rounded-3">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- FEATURED COLLECTIONS -->
+<section class="container my-5">
+  <h2 class="text-center fw-bold mb-4">Featured Collections</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://authentic-shoes.com/wp-content/uploads/2023/04/nike-air-max-270-white-black-total-orange-71-1600_44c8ee96ce054a04b2e038e94148f45f.jpg" class="card-img-top" alt="men">
+        <div class="card-body text-center">
+          <h5 class="card-title">Men</h5>
+          <a href="#" class="btn btn-dark">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://brittanyxavier.com/wp-content/uploads/2018/03/nike-paris-brittany-xavier-2.jpg" class="card-img-top" alt="women">
+        <div class="card-body text-center">
+          <h5 class="card-title">Women</h5>
+          <a href="#" class="btn btn-dark">Shop Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsBqnOhWj5D9xf6M7AiQ9cYzqFH5wMASOokQ&s" class="card-img-top" alt="kids">
+        <div class="card-body text-center">
+          <h5 class="card-title">Kids</h5>
+          <a href="#" class="btn btn-dark">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="container my-5">
+  <h2 class="text-center fw-bold mb-4">Popular Shoes</h2>
+  <div class="row g-4">
+    <div class="col-md-3">
+  <div class="card product-card">
+    <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/abbc2d6e-05e7-4c9c-9060-3bbd090a1136/NIKE+ZOOM+VOMERO+5+SE.png" class="card-img-top" alt="AF1">
+    <div class="card-body">
+      <span style="color: red; font-weight: 700;">Bestseller</span>
+      <h6 class="card-title">Nike Air Force 1</h6>
+      <p>Men's Shoes</p>
+      <p class="text-muted">₹8,495</p>
+      <button class="btn btn-dark w-100">Buy Now</button>
+    </div>
+  </div>
+</div>
+    <div class="col-md-3">
+      <div class="card product-card">
+        <img src="https://static.nike.com/a/images/t_default/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/0c0f8c6e-cde5-4850-b6ca-c476dddc51cd/WMNS+AIR+JORDAN+1+MID+SE.png" class="card-img-top" alt="Jordan 1">
+        <div class="card-body">
+          <h6 class="card-title">Air Jordan 1 Mid</h6>
+          <p>Women's Shoes</p>
+          <p class="text-muted">₹11,495</p>
+          <button class="btn btn-dark w-100">Buy Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card product-card">
+        <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/271c303e-6efd-4444-bd74-a881adfe5d6f/W+AIR+MAX+270.png" class="card-img-top" alt="Air Max">
+        <div class="card-body">
+            <span style="color: red; font-weight: 700;">10% Offer</span>
+          <h6 class="card-title">Nike Air Max 270</h6>
+          <p>Men's Shoes</p>
+          <p class="text-muted"><s>₹13,500</s><br>₹12,995</p>
+          <button class="btn btn-dark w-100">Buy Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card product-card">
+        <img src="https://static.nike.com/a/images/f_auto/dpr_3.0,cs_srgb/w_363,c_limit/e9381da2-3e10-47c7-9e08-129db0925160/nike-unveils-technological-advances-in-the-pegasus-41.jpg" class="card-img-top" alt="Pegasus">
+        <div class="card-body">
+          <h5 class="card-title">Nike Pegasus 41</h5>
+          <p> Women's Road Running Shoes</p>
+          <p class="text-muted">₹9,495</p>
+          <button class="btn btn-dark w-100">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--BANNER -->
+<div class="promo-banner">
+  <h2 class="fw-bold">Become a Nike Member</h2>
+  <p>Sign up for exclusive offers, early access, and more.</p>
+  <a href="#" class="btn btn-light">Join Us</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center text-md-start">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Help</h6>
+        <ul class="list-unstyled">
+          <li><a href="#">Order Status</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Payment Options</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">About Nike</h6>
+        <ul class="list-unstyled">
+          <li><a href="#">News</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Investors</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 mb-3">
+        <h6 class="fw-bold">Social</h6>
+        <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">Twitter</a>
+      </div>
+    </div>
+    <hr class="border-light">
+    <p class="text-center mb-0">© 2025 Nike, Inc. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
